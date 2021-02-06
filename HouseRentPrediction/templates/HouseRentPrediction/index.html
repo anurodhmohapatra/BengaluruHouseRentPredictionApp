@@ -1,0 +1,60 @@
+{% extends "HouseRentPrediction/base.html" %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center">Welcome To Bangalore House Rent Prediction Website</h1>
+</div>
+<br>
+<form action="{% url 'prediction' %}" method="post">{% csrf_token %}
+    <div class="container">
+        <h3 class="text-center">Please choose Area below. (If not found select others)</h3>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col mb-3">
+                <select class="form-select" name="address" required="required">
+                    <option value="" disabled selected>Select your option</option>
+                    {% for ad in add%}
+                    <option value="{{ad}}">{{ad}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+    <div class="container">
+        <h3 class="text-center">Enter property size in sqft.(min 500)</h3>
+        <p class="text-center">Avg. Size for 1 BHK = 500 Sqft</p>
+        <p class="text-center">Avg. Size for 2 BHK = 1000 Sqft</p>
+        <p class="text-center">Avg. Size for 3 BHK = 1500 Sqft</p>
+        <p class="text-center">Avg. Size for 4 BHK = 2600 Sqft</p>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col mb-3">
+                <input class="form-control" type="number" placeholder="Only numeric character allowed" name="size"
+                       required="required" min="500">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-md-auto">
+                <button type="submit" class="btn btn-success ">Click here to predict</button>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+</form>
+<br>
+<div class="container">
+    <h1 class="text-center">{{pred}}</h1>
+</div>
+{% endblock %}
